@@ -33,8 +33,11 @@
             >
               <div>
                 <button>
-                    <!-- closing the modal on clickng the trash icon -->
-                  <TrashIcon class="w-5 h-5" @click="open = false" />
+                  <!-- closing the modal on clickng the trash icon -->
+                  <TrashIcon
+                    class="w-5 h-5"
+                    @click="$emit('closeModal', 'add')"
+                  />
                 </button>
 
                 <div
@@ -61,7 +64,7 @@
                         oninvalid="Enter at least 5 characters"
                         aria-describedby="input-live-help input-url-feedback"
                         autofocus
-                        placeholder="Enter name"
+                        placeholder="Enter Website Name"
                         class="block w-full rounded-md border-0 text-gray-900 shadow-sm p-[8px] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:ring-2 sm:text-sm sm:leading-6 focus-within:outline-none focus-visible:outline-none focus-visible:shadow-none focus-visible:ring-indigo-600"
                       />
                     </div>
@@ -75,7 +78,7 @@
                         oninvalid="Enter at least 5 characters"
                         aria-describedby="input-live-help input-url-feedback"
                         autofocus
-                        placeholder="Enter url"
+                        placeholder="Enter Website url"
                         class="block w-full rounded-md border-0 text-gray-900 shadow-sm p-[8px] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:ring-2 sm:text-sm sm:leading-6 focus-within:outline-none focus-visible:outline-none focus-visible:shadow-none focus-visible:ring-indigo-600"
                       />
                     </div>
@@ -89,7 +92,6 @@
                   type="button"
                   class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   @click="AddWebSite"
-
                 >
                   Add Website
                 </button>
@@ -118,7 +120,7 @@ import { TrashIcon } from "@heroicons/vue/20/solid";
 const open = ref(true);
 
 //emits starts here
-const emits = defineEmits(["addWebSite"]);
+const emits = defineEmits(["addWebSite", "closeModal"]);
 //emits ends here
 
 //website details object
@@ -128,9 +130,9 @@ const webSite: any = ref({
 });
 
 //emitting website details starts here
-const AddWebSite =() => { 
-    emits('addWebSite',webSite.value)
-    open.value=false
-}
+const AddWebSite = () => {
+  emits("addWebSite", webSite.value);
+  open.value = false;
+};
 // emits ends here
 </script>

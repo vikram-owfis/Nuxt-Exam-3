@@ -33,8 +33,11 @@
             >
               <div>
                 <button>
-                    <!-- closing the modal on clicing trash icon -->
-                  <TrashIcon class="w-5 h-5" @click="open = false" />
+                  <!-- closing the modal on clicing trash icon -->
+                  <TrashIcon
+                    class="w-5 h-5"
+                    @click="emits('closeModal', 'edit')"
+                  />
                 </button>
                 <div
                   class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100"
@@ -78,7 +81,7 @@
                         class="block w-full rounded-md border-0 text-gray-900 shadow-sm p-[8px] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:ring-2 sm:text-sm sm:leading-6 focus-within:outline-none focus-visible:outline-none focus-visible:shadow-none focus-visible:ring-indigo-600"
                       />
                     </div>
-                      <!-- URL field ends here -->
+                    <!-- URL field ends here -->
                   </div>
                 </div>
               </div>
@@ -89,7 +92,7 @@
                   class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   @click="updateSelected"
                 >
-                  Update 
+                  Update
                 </button>
               </div>
               <!-- update button ends here -->
@@ -116,35 +119,34 @@ import { TrashIcon } from "@heroicons/vue/20/solid";
 const open = ref(true);
 
 //define emits starts here
-const emits= defineEmits(['updateWebSite'])
-//define emits ends here 
+const emits = defineEmits(["updateWebSite", "closeModal"]);
+//define emits ends here
 
 //props schema starts here
 interface UpdateWebSiteSchema {
   selectedWebSite: {
-    name:string,
-    url:string,
-    uid:string,
+    name: string;
+    url: string;
+    uid: string;
   };
 }
 // props schema ends here
- 
+
 //defining props
 const props = defineProps<UpdateWebSiteSchema>();
 
-//website details 
+//website details  
 const updateWebSite: any = ref({
   name: props.selectedWebSite.name,
   url: props.selectedWebSite.url,
-  uid:props.selectedWebSite.uid
+  uid: props.selectedWebSite.uid,
 });
 
 //emiting the updated website starts here
-const updateSelected = ()=> { 
-    console.log(updateWebSite,'sdf');
-    emits('updateWebSite',updateWebSite)
-    open.value=false
-}
+const updateSelected = () => {
+  console.log(updateWebSite, "sdf");
+  emits("updateWebSite", updateWebSite);
+  open.value = false;
+};
 //emitting the updated website ends here
-
 </script>

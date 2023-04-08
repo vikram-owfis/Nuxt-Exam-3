@@ -16,10 +16,10 @@
     <button
       v-if="!pending"
       type="button"
-      @click="isAdding = !isAdding"
+      @click="isAdding = true"
       class="rounded-md bg-gray-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500"
     >
-      ADD
+      Add Website
     </button>
     <!-- add button start here -->
 
@@ -48,7 +48,7 @@
                 <dd class="text-2xl text-gray-500">{{ website.title }}</dd>
                 <dd class="mt-3">
                   <a
-                    class="rounded-full bg-white px-2 py-1 text-lg font-medium text-blue-800 cursor-pointer" 
+                    class="rounded-full bg-white px-2 py-1 text-lg font-medium text-blue-800 cursor-pointer"
                     >{{ website.url }}</a
                   >
                 </dd>
@@ -93,9 +93,10 @@
     </div>
     <!-- website cards ends here -->
 
+    <!-- And and Edit modals -->
     <div>
       <!-- Add modal starts here -->
-      <Add v-if="isAdding" @addWebSite="addWebSite" />
+      <Add v-if="isAdding" @addWebSite="addWebSite" @closeModal="closeModal" />
       <!-- add modal ends here -->
 
       <!-- edit modal stars here -->
@@ -103,6 +104,7 @@
         v-if="isEditing"
         :selectedWebSite="selectedWebSite"
         @updateWebSite="updateWebSite"
+        @closeModal="closeModal"
       />
       <!-- edit modal ends here -->
     </div>
@@ -113,7 +115,7 @@
           class="h-72 w-72 mb-4"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU3rUmjOvvo41Ga_G44WjcenlHmAJhBZpWtg&usqp=CAU"
         />
-        <h1 class="text-2xl font-bold">No Website Add Your Web site</h1>
+        <h1 class="text-2xl font-bold">No Websites Add Your Website</h1>
       </div>
     </div>
     <!-- No website data ends here -->
@@ -166,14 +168,10 @@ const getIndexOfSelected = (uid: any) => {
 };
 // finding the index of website ends here
 
-
-const updateSelectedWebSite =(website:any)=>{
-    selectedWebSite.value=website 
-    isEditing.value=true
-}
-
-
-
+const updateSelectedWebSite = (website: any) => {
+  selectedWebSite.value = website;
+  isEditing.value = true;
+};
 
 //getting  websites starts here
 const getWebSites = async () => {
@@ -186,6 +184,8 @@ const getWebSites = async () => {
   );
   webSiteList.value = data;
   pending.value = false;
+  console.log(data);
+
   return data;
 };
 //getting websites ends here
@@ -222,15 +222,19 @@ const updateWebSite = async (updateWebSite: any) => {
 //update call ends here
 
 //delete website starts here on click on trash icon
-const deleteSite = async (webSite: any) => { 
-    
+const deleteSite = async (webSite: any) => {
   const { data, error } = await useFetch(`${props.baseUrl}/${webSite.uid}`, {
     method: "DELETE",
-    headers: authHeader.value
+    headers: authHeader.value,
   });
   //get the index of website
   indexOfSelected = getIndexOfSelected(webSite.uid);
   webSiteList.value.splice(indexOfSelected, 1);
 };
 //delete call ends here
+//closing add or edit modal 
+const closeModal = (value: any) => {
+  if (value == "edit") isEditing.value = false;
+  isAdding.value = false;
+};
 </script>
