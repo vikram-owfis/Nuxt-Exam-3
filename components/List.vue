@@ -222,7 +222,8 @@ const updateWebSite = async (updateWebSite: any) => {
 //update call ends here
 
 //delete website starts here on click on trash icon
-const deleteSite = async (webSite: any) => {
+const deleteSite = async (webSite: any) => { 
+    
   const { data, error } = await useFetch(`${props.baseUrl}/${webSite.uid}`, {
     method: "DELETE",
     headers: authHeader.value
