@@ -25,7 +25,7 @@
                     <div class="flex items-start justify-between">
                       <DialogTitle
                         class="text-base font-semibold leading-6 text-gray-900"
-                        >Candidate Mock</DialogTitle
+                        >Update Builder Details</DialogTitle
                       >
                       <div class="ml-3 flex h-7 items-center">
                         <button
@@ -34,7 +34,7 @@
                           @click="open = false"
                         >
                           <XMarkIcon
-                            @click="emtis('closeSidebar')"
+                            @click="emtis('closeModal', 'edit')"
                             class="h-6 w-6"
                             aria-hidden="true"
                           />
@@ -44,7 +44,7 @@
                   </div>
 
                   <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                    <!-- candidate name starts here -->
+                    <!-- builder name starts here -->
 
                     <div class="mt-2 mb-3">
                       <label
@@ -54,7 +54,7 @@
                       >
                       <input
                         ref="text_input_ref"
-                        v-model="candidae.name"
+                        v-model="updateBuilder.name"
                         type="textarea"
                         oninvalid="Enter at least 5 characters"
                         aria-describedby="input-live-help input-url-feedback"
@@ -64,90 +64,88 @@
                         class="block w-full mt-2 rounded-md border-0 text-gray-900 shadow-sm p-[8px] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:ring-2 sm:text-sm sm:leading-6 focus-within:outline-none focus-visible:outline-none focus-visible:shadow-none focus-visible:ring-indigo-600"
                       />
                     </div>
-                    <!-- candidate name ends here -->
-                    <!-- type  starts here -->
+                    <!-- builder name ends here -->
+                    <!-- phone number  starts here -->
                     <div class="mt-2 mb-3">
                       <label
-                        for="type"
+                        for="phoneNumber"
                         class="text-base font-semibold leading-6 text-gray-900"
-                        >Type</label
-                      >
-                      <div class="mt-2.5">
-                        <select
-                          v-model="candidae.type"
-                          id="type"
-                          class="block w-full mt-2 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        >
-                          <option value="practice">practice</option>
-                          <option value="videoprofile">videoprofile</option>
-                        </select>
-                      </div>
-                    </div>
-                    <!-- type ends here -->
-
-                    <!-- difficulty level starts here -->
-                    <div class="mt-2 mb-3">
-                      <label
-                        for="type"
-                        class="text-base font-semibold leading-6 text-gray-900"
-                        >Difficulty Level</label
-                      >
-                      <div class="mt-2.5">
-                        <select
-                          v-model="candidae.difficulty_level"
-                          id="type"
-                          class="block w-full mt-2 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        >
-                          <!-- <option>Applied</option>
-                            <option>Disqualified</option>
-                            <option>Shortlisted</option>
-                            <option>Rejected</option> -->
-                          <option value="Easy">Easy</option>
-                          <option value="Medium">Medium</option>
-                          <option value="Hard">Hard</option>
-                        </select>
-                      </div>
-                    </div>
-                    <!-- difficulty level ends here -->
-                    <!-- Description starts here -->
-                    <div class="mt-2">
-                      <label
-                        for="Description"
-                        class="text-base font-semibold leading-6 text-gray-900"
-                        >Description</label
+                        >Phone Number</label
                       >
                       <input
                         ref="text_input_ref"
-                        v-model="candidae.description"
+                        v-model="updateBuilder.phone_number"
                         type="textarea"
                         oninvalid="Enter at least 5 characters"
                         aria-describedby="input-live-help input-url-feedback"
                         autofocus
-                        id="Description"
+                        id="phoneNumber"
+                        placeholder="Enter phone number"
+                        class="block w-full mt-2 rounded-md border-0 text-gray-900 shadow-sm p-[8px] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:ring-2 sm:text-sm sm:leading-6 focus-within:outline-none focus-visible:outline-none focus-visible:shadow-none focus-visible:ring-indigo-600"
+                      />
+                    </div>
+                    <!-- phone number ends here -->
+
+                    <!-- email  starts here -->
+                    <div class="mt-2 mb-3">
+                      <label
+                        for="email"
+                        class="text-base font-semibold leading-6 text-gray-900"
+                        >Email</label
+                      >
+                      <input
+                        ref="text_input_ref"
+                        v-model="updateBuilder.email"
+                        type="textarea"
+                        oninvalid="Enter at least 5 characters"
+                        aria-describedby="input-live-help input-url-feedback"
+                        autofocus
+                        id="email"
+                        placeholder="Enter email"
+                        class="block w-full mt-2 rounded-md border-0 text-gray-900 shadow-sm p-[8px] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:ring-2 sm:text-sm sm:leading-6 focus-within:outline-none focus-visible:outline-none focus-visible:shadow-none focus-visible:ring-indigo-600"
+                      />
+                    </div>
+                    <!-- email  ends here -->
+                    <!-- Description starts here -->
+                    <div class="mt-2">
+                      <label
+                        for="establishedYear"
+                        class="text-base font-semibold leading-6 text-gray-900"
+                      >
+                        Established year</label
+                      >
+                      <input
+                        ref="text_input_ref"
+                        v-model="updateBuilder.established_year"
+                        type="textarea"
+                        oninvalid="Enter at least 5 characters"
+                        aria-describedby="input-live-help input-url-feedback"
+                        autofocus
+                        id="establishedYear"
                         placeholder="Resume Url"
                         class="block w-full mt-2 rounded-md border-0 text-gray-900 shadow-sm p-[8px] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:ring-2 sm:text-sm sm:leading-6 focus-within:outline-none focus-visible:outline-none focus-visible:shadow-none focus-visible:ring-indigo-600"
                       />
                     </div>
                     <!-- Description ends here -->
                   </div>
-                  <!-- add website button starts here -->
+                  <!-- update builder button starts here -->
                   <div class="mt-5 flex justify-between">
                     <button
                       type="button"
-                      @click="emtis('closeSidebar')"
+                      @click="emtis('closeModal')"
                       class="inline-flex w-full mr-3 justify-center rounded-md bg-slate-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       Cancel
                     </button>
                     <button
                       type="button"
-                      @click="addCandidate"
+                      @click="updateBuilderDetails"
                       class="inline-flex w-full justify-center rounded-md bg-slate-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Add Mock
+                      Update Builder
                     </button>
                   </div>
-                  <!-- add website button ends here -->
+                  <!-- update builder button ends here -->
                 </div>
               </DialogPanel>
             </TransitionChild>
@@ -157,8 +155,8 @@
     </Dialog>
   </TransitionRoot>
 </template>
-  
-  <script setup lang="ts">
+      
+      <script setup lang="ts">
 import { ref } from "vue";
 import {
   Dialog,
@@ -169,28 +167,39 @@ import {
 } from "@headlessui/vue";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
 
+
+//props schema starts here (here iam using only name, url and uid  if u want you can add them into schema)
+interface UpdateBuilderSchema {
+    selectedBuilder: {
+    name: string;
+    email: string;
+    phone_number:string
+    established_year:string
+    uid: string;
+  };
+}
+// props schema ends here
+
+//defining props
+const props = defineProps<UpdateBuilderSchema>();
+
+
+
 const open = ref(true);
 //defining emits
-const emtis = defineEmits(["addCandidateMock", "closeSidebar"]);
+const emtis = defineEmits(["updateBuilder", "closeModal"]);
 
-//candidate details object
-const candidae = ref({
-  name: "",
-  type: "practice",
-  max_time_allowed: 0,
-  due_date: "2023-04-09T11:42:54.118Z",
-  difficulty_level: "Easy",
-  description: "",
-  questions: {},
-  multiple_attempts_allowed: 0,
-  instructions: {},
-  status: 0,
-  owner_id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  last_modified_date: "2023-04-09T11:42:54.118Z",
+//builder details object
+const updateBuilder = ref({
+  name: props.selectedBuilder.name,
+  email: props.selectedBuilder.email,
+  phone_number: props.selectedBuilder.phone_number,
+  established_year: props.selectedBuilder.established_year,
+  uid:props.selectedBuilder.uid
 });
 
-//emitting the added values
-const addCandidate = () => {
-  emtis("addCandidateMock", candidae.value);
+//emitting the builder details
+const updateBuilderDetails = () => {
+  emtis("updateBuilder", updateBuilder.value);
 };
 </script>
