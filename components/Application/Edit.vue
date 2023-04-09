@@ -1,7 +1,4 @@
 <template>
-  <div>
-    <WebsiteMain />
-  </div>
+  <div></div>
 </template>
-
 <script setup lang="ts"></script>
