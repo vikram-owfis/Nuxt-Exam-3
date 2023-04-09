@@ -196,7 +196,7 @@ onMounted(async () => {
 
 //getting  applications starts here
 const getApplications = async () => {
-  const data = await $fetch(
+  const data:any = await $fetch(
     `${props.baseUrl}/?offset=0&limit=100&sort_column=id&sort_direction=desc`,
     {
       method: "GET",
@@ -205,7 +205,7 @@ const getApplications = async () => {
   );
   applicationsList.value = data;
   pending.value = false;
-  return data;
+  return data.reverse(); //we are showing last in first reversing the array
 };
 //getting applications ends here
 
@@ -219,7 +219,8 @@ const addApplication = async (application: any) => {
     body: JSON.stringify(application),
   });
   isAdding.value = false;
-  applicationsList.value.unshift(application) ;
+  applicationsList.value=getApplications();//get application 
+  //Note: we calling this function to get uid for the newly added data .if we directly add data into array we will not get uid
 };
 //post call ends here
 
