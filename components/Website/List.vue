@@ -19,7 +19,7 @@
       @click="isAdding = true"
       class="rounded-md bg-gray-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500"
     >
-    <!--  -->
+      <!--  -->
       {{ addButton }}
     </button>
     <!-- add button start here -->
@@ -97,7 +97,11 @@
     <!-- And and Edit modals -->
     <div>
       <!-- Add modal starts here -->
-      <WebsiteAdd v-if="isAdding" @addWebSite="addWebSite" @closeModal="closeModal" />
+      <WebsiteAdd
+        v-if="isAdding"
+        @addWebSite="addWebSite"
+        @closeModal="closeModal"
+      />
       <!-- add modal ends here -->
 
       <!-- edit modal stars here -->
@@ -176,7 +180,7 @@ const updateSelectedWebSite = (website: any) => {
 
 //getting  websites starts here
 const getWebSites = async () => {
-  const data = await $fetch(
+  const data: any = await $fetch(
     `${props.baseUrl}/?offset=0&limit=100&sort_column=id&sort_direction=desc`,
     {
       method: "GET",
@@ -185,9 +189,8 @@ const getWebSites = async () => {
   );
   webSiteList.value = data;
   pending.value = false;
-  console.log(data);
 
-  return data;
+  return data.reverse(); //as we are showing last added value first in the UI
 };
 //getting websites ends here
 
@@ -199,10 +202,10 @@ const addWebSite = async (webSite: any) => {
     body: JSON.stringify(webSite),
   });
   isAdding.value = false;
-  let sites = getWebSites();
-  webSiteList.value = sites;
+  webSiteList.value = await getWebSites(); //get application call
+  // Note: by calling  this method we will get uid for newly added data .if we directly add the data to array  uid is not avilable for that
 };
-//post call ends here
+
 
 //updating the selected website on click on update button starts here
 const updateWebSite = async (updateWebSite: any) => {
@@ -233,7 +236,8 @@ const deleteSite = async (webSite: any) => {
   webSiteList.value.splice(indexOfSelected, 1);
 };
 //delete call ends here
-//closing add or edit modal 
+
+//closing add or edit modal
 const closeModal = (value: any) => {
   if (value == "edit") isEditing.value = false;
   isAdding.value = false;
